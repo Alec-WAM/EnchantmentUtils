@@ -1,0 +1,91 @@
+{
+    "textures": {
+		"particle": "enchantutils:block/enchantment_editor/top",
+        "side": "enchantutils:block/enchantment_editor/side",
+        "top": "enchantutils:block/enchantment_editor/top",
+        "bottom": "enchantutils:block/enchantment_editor/bottom",
+        "slot": "enchantutils:block/enchantment_editor/slot"
+    },
+    "elements": [
+        {
+            "name": "Base",
+            "from": [ 0.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 12.0, 16.0 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 0.0, 4.0, 16.0, 16.0 ] },
+                "east": { "texture": "#side", "uv": [ 0.0, 4.0, 16.0, 16.0 ] },
+                "south": { "texture": "#side", "uv": [ 0.0, 4.0, 16.0, 16.0 ] },
+                "west": { "texture": "#side", "uv": [ 0.0, 4.0, 16.0, 16.0 ] },
+                "up": { "texture": "#top", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#bottom", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "MainSlot",
+            "from": [ 4.0, 13.0, 9.0 ], 
+            "to": [ 12.0, 14.0, 17.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": -45.0 },
+            "faces": {
+                "north": { "texture": "#slot", "uv": [ 4.0, 0.0, 12.0, 1.0 ] },
+                "east": { "texture": "#slot", "uv": [ 15.0, 4.0, 16.0, 12.0 ] },
+                "south": { "texture": "#slot", "uv": [ 4.0, 15.0, 12.0, 16.0 ] },
+                "west": { "texture": "#slot", "uv": [ 0.0, 4.0, 1.0, 12.0 ] },
+                "up": { "texture": "#slot", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#slot", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "SlotPole",
+            "from": [ 7.0, 12.0, 7.0 ], 
+            "to": [ 9.0, 15.0, 9.0 ], 
+            "faces": {
+                "north": { "texture": "#slot", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "east": { "texture": "#slot", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "south": { "texture": "#slot", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "west": { "texture": "#slot", "uv": [ 1.0, 1.0, 3.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "PoleDetail",
+            "from": [ 7.0, 15.0, 8.0 ], 
+            "to": [ 9.0, 16.0, 9.0 ], 
+            "faces": {
+                "south": { "texture": "#slot", "uv": [ 1.0, 1.0, 3.0, 2.0 ] },
+                "east": { "texture": "#slot", "uv": [ 1.0, 1.0, 2.0, 2.0 ] },
+                "west": { "texture": "#slot", "uv": [ 1.0, 1.0, 2.0, 2.0 ] }
+            }
+        }
+    ],
+	"display": {
+        "gui": {
+            "rotation": [ 30, 225, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0],
+            "scale":[ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.5, 0.5, 0.5 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 45, 0 ],
+            "translation": [ 0, 2.5, 0],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.40, 0.40, 0.40 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 0, 225, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.40, 0.40, 0.40 ]
+        }
+    }
+}

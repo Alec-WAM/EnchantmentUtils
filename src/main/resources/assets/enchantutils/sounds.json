@@ -1,0 +1,9 @@
+{
+	"ui.upgradepoint.unlock": {
+		"category": "player",
+		"subtitle": "enchantutils.subtitles.upgradepoint_unlock",
+		"sounds": [
+			"enchantutils:ui/upgradepoint_unlock"
+		]	
+	}
+}

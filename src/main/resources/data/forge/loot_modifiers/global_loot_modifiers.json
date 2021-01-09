@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"entries": [
+		"enchantutils:smelting_upgrade",
+		"enchantutils:upgrade_block_enderchest"
+	]
+}

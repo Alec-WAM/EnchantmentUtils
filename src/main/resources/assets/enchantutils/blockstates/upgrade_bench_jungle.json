@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "enchantutils:block/upgrade_bench_jungle"},
+		"facing=south": {"model": "enchantutils:block/upgrade_bench_jungle", "y": 180},
+		"facing=west": {"model": "enchantutils:block/upgrade_bench_jungle", "y": 270},
+		"facing=east": {"model": "enchantutils:block/upgrade_bench_jungle", "y": 90}
+	}
+}

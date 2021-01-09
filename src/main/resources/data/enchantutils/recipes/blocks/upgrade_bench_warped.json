@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#E#",
+	"S S"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_slab"
+    },
+	"E": {
+      "item": "minecraft:enchanting_table"
+    },
+	"S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "enchantutils:upgrade_bench_warped"
+  }
+}

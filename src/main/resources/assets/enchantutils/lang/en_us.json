@@ -1,0 +1,62 @@
+{
+  "_comment": "Blocks",
+  "block.enchantutils.enchantment_editor": "Enchantment Editor",  
+  "block.enchantutils.upgrade_bench_oak": "Upgrade Bench (Oak)",
+  "block.enchantutils.upgrade_bench_spruce": "Upgrade Bench (Spruce)",
+  "block.enchantutils.upgrade_bench_birch": "Upgrade Bench (Birch)",
+  "block.enchantutils.upgrade_bench_jungle": "Upgrade Bench (Jungle)",
+  "block.enchantutils.upgrade_bench_acacia": "Upgrade Bench (Acacia)",
+  "block.enchantutils.upgrade_bench_dark_oak": "Upgrade Bench (Dark Oak)",
+  "block.enchantutils.upgrade_bench_crimson": "Upgrade Bench (Crimson)",
+  "block.enchantutils.upgrade_bench_warped": "Upgrade Bench (Warped)",
+  
+  "block.enchantutils.reinforced_anvil": "Reinforced Anvil",
+  
+  "_comment": "Item",
+  "item.enchantutils.upgrade_module": "Upgrade Module",
+  
+  "_comment": "Entity",
+  "entity.enchantutils.upgraded_item": "Upgraded Item Entity",
+  
+  "_comment": "Gui",
+  "enchantutils.gui.upgradebench": "Upgrade Bench",
+  "enchantutils.gui.upgradebench.points": "Points: %s",
+  "enchantutils.gui.upgradebench.install": "Install",
+  "enchantutils.popup.upgradepoint.unlock": "Upgrade Point Unlocked!",
+  
+  "_comment": "Tooltips",
+  "enchantutils.tooltip.upgradepoints.xp": "Tool XP: %s/%s",
+  "enchantutils.tooltip.upgradepoints.basicitem": "Upgrade Module Installed",
+  "enchantutils.tooltip.upgradepoints.points": "Upgrade Points: %s",
+  "enchantutils.tooltip.upgrades.shift": "<Hold Shift to see Upgrades>",
+  
+  "enchantutils.tooltip.enchantment.invalid": "Invalid Enchantment:",
+  "enchantutils.tooltip.enchantment.invalid.multi": "Invalid Enchantments:",
+  
+  "_comment": "Messages",
+  "enchantutils.message.soulbound.consume": "All Soul Bound Upgrades have been consumed",
+  
+  "_comment": "Upgrades",
+  "enchantutils.upgrade.digspeed": "Haste %s",
+  "enchantutils.upgrade.digspeed.tooltip": "Mining Speed Increase",
+  "enchantutils.upgrade.autosmelt": "Auto Smelt",
+  "enchantutils.upgrade.autosmelt.tooltip": "Smelt Block Drops",
+  "enchantutils.upgrade.fireproof": "Fire Proof",
+  "enchantutils.upgrade.fireproof.tooltip": "Prevents Tool from burning in fire",  
+  "enchantutils.upgrade.elytra_trail": "Elytra Trail",
+  "enchantutils.upgrade.elytra_trail.tooltip": "Creates custom particle trail during elytra flight",
+  "enchantutils.upgrade.elytra_trail.bubble": "Bubbles",
+  "enchantutils.upgrade.elytra_trail.flame": "Flame",
+  "enchantutils.upgrade.elytra_trail.glint": "Glint",  
+  "enchantutils.upgrade.elytra_trail.sparkle": "Sparkle",
+  "enchantutils.upgrade.elytra_trail.heart": "Hearts",
+  "enchantutils.upgrade.elytra_trail.color": "Color",
+  "enchantutils.upgrade.soulbound": "Soul Bound",
+  "enchantutils.upgrade.soulbound.tooltip": "Item will not be dropped on death and will respawn in your inventory",
+  "enchantutils.upgrade.soulbound.tooltip.consume": "Upgrade Consumed on Death",
+  "enchantutils.upgrade.explosion_proof": "Explosion Resistant",
+  "enchantutils.upgrade.explosion_proof.tooltip": "Item will not be destroyed by explosions",
+  
+  "_comment": "Subtitles",
+  "enchantutils.subtitles.upgradepoint_unlock": "Unlocked Upgrade Point"
+}

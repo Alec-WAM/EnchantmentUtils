@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "enchantutils:block/enchantment_editor"},
+		"facing=south": {"model": "enchantutils:block/enchantment_editor", "y": 180},
+		"facing=west": {"model": "enchantutils:block/enchantment_editor", "y": 270},
+		"facing=east": {"model": "enchantutils:block/enchantment_editor", "y": 90}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "enchantutils:block/upgrade_bench_birch"},
+		"facing=south": {"model": "enchantutils:block/upgrade_bench_birch", "y": 180},
+		"facing=west": {"model": "enchantutils:block/upgrade_bench_birch", "y": 270},
+		"facing=east": {"model": "enchantutils:block/upgrade_bench_birch", "y": 90}
+	}
+}

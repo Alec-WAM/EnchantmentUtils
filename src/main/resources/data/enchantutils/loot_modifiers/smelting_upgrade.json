@@ -1,0 +1,10 @@
+{
+  "type": "enchantutils:smelting_upgrade",
+  "conditions": [
+	{
+      "condition": "enchantutils:upgrade_check",
+      "upgrade": "enchantutils:autosmelt",
+	  "min_level": 1
+    }
+  ]
+}
