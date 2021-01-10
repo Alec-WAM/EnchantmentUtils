@@ -14,6 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -28,17 +29,36 @@ public class EntityDamageXPHandler implements IDamageEntityXP, ICapabilitySerial
 
 	private Map<UUID, Map<ItemStack, Double>> playerToDamageMap = new HashMap<>();
 
+	private Map<FakePlayer, Map<ItemStack, Double>> fakePlayerToDamageMap = new HashMap<>();
+
+	
 	public void addDamageFromTool(double damage, ItemStack tool, PlayerEntity player) {
-		Map<ItemStack, Double> damageMap = playerToDamageMap.getOrDefault(player.getUniqueID(), new HashMap<ItemStack, Double>());
-
-		damage += getDamageDealtByTool(tool, player);
-
-		damageMap.put(tool, damage);
-		playerToDamageMap.put(player.getUniqueID(), damageMap);
+		if(player instanceof FakePlayer){
+			FakePlayer fakePlayer = (FakePlayer)player;
+			Map<ItemStack, Double> damageMap = fakePlayerToDamageMap.getOrDefault(fakePlayer, new HashMap<ItemStack, Double>());
+			
+			damage += getDamageDealtByTool(tool, player);
+	
+			damageMap.put(tool, damage);
+			fakePlayerToDamageMap.put(fakePlayer, damageMap);
+		}
+		else {
+			Map<ItemStack, Double> damageMap = playerToDamageMap.getOrDefault(player.getUniqueID(), new HashMap<ItemStack, Double>());
+	
+			damage += getDamageDealtByTool(tool, player);
+	
+			damageMap.put(tool, damage);
+			playerToDamageMap.put(player.getUniqueID(), damageMap);
+		}
 	}
 
 	public double getDamageDealtByTool(ItemStack tool, PlayerEntity player) {
 		Map<ItemStack, Double> damageMap = playerToDamageMap.getOrDefault(player.getUniqueID(), new HashMap<ItemStack, Double>());
+		
+		if(player instanceof FakePlayer){
+			FakePlayer fakePlayer = (FakePlayer)player;
+			damageMap = fakePlayerToDamageMap.getOrDefault(fakePlayer, new HashMap<ItemStack, Double>());
+		} 
 
 		return damageMap.entrySet().stream()
 				.filter(itemStackFloatEntry -> UpgradePointManager.areUpgradeItemsEqual(tool, itemStackFloatEntry.getKey()))
@@ -49,8 +69,18 @@ public class EntityDamageXPHandler implements IDamageEntityXP, ICapabilitySerial
 
 	public void distributeXpToTools(LivingEntity deadEntity) {
 		playerToDamageMap.forEach((uuid, itemStackFloatMap) -> distributeXpForPlayer(deadEntity.getEntityWorld(), uuid, itemStackFloatMap));
+		fakePlayerToDamageMap.forEach((fakePlayer, itemStackFloatMap) -> distributeXpForPlayer(fakePlayer, itemStackFloatMap));
 	}
 
+	private void distributeXpForPlayer(FakePlayer fakePlayer, Map<ItemStack, Double> damageMap) {
+		Optional.ofNullable(fakePlayer)
+		.ifPresent(
+				player -> damageMap.forEach(
+						(itemStack, damage) -> distributeXpToPlayerForTool(player, itemStack, damage)
+						)
+				);
+	}
+	
 	private void distributeXpForPlayer(World world, UUID playerUuid, Map<ItemStack, Double> damageMap) {
 		Optional.ofNullable(world.getPlayerByUuid(playerUuid))
 		.ifPresent(
@@ -61,22 +91,24 @@ public class EntityDamageXPHandler implements IDamageEntityXP, ICapabilitySerial
 	}
 
 	private void distributeXpToPlayerForTool(PlayerEntity player, ItemStack tool, double damage) {
-		if(!tool.isEmpty() && player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).isPresent()) {
-			IItemHandler itemHandler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-
-			// check for identity. should work in most cases because the entity was killed without loading/unloading
-			for(int i = 0; i < itemHandler.getSlots(); i++) {
-				if(itemHandler.getStackInSlot(i) == tool) {
-					UpgradePointManager.earnToolXP(player, tool, Math.round(damage), UpgradePointManager.getMaxXPDamage());
-					return;
+		if(!tool.isEmpty()) {
+			if(player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).isPresent()){
+				IItemHandler itemHandler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+	
+				// check for identity. should work in most cases because the entity was killed without loading/unloading
+				for(int i = 0; i < itemHandler.getSlots(); i++) {
+					if(itemHandler.getStackInSlot(i) == tool) {
+						UpgradePointManager.earnToolXP(player, tool, Math.round(damage), UpgradePointManager.getMaxXPDamage());
+						return;
+					}
 				}
-			}
-
-			// check for equal stack in case instance equality didn't find it
-			for(int i = 0; i < itemHandler.getSlots(); i++) {
-				if(UpgradePointManager.areUpgradeItemsEqual(itemHandler.getStackInSlot(i), tool)) {
-					UpgradePointManager.earnToolXP(player, itemHandler.getStackInSlot(i), Math.round(damage), UpgradePointManager.getMaxXPDamage());
-					return;
+	
+				// check for equal stack in case instance equality didn't find it
+				for(int i = 0; i < itemHandler.getSlots(); i++) {
+					if(UpgradePointManager.areUpgradeItemsEqual(itemHandler.getStackInSlot(i), tool)) {
+						UpgradePointManager.earnToolXP(player, itemHandler.getStackInSlot(i), Math.round(damage), UpgradePointManager.getMaxXPDamage());
+						return;
+					}
 				}
 			}
 		}

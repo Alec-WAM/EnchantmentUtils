@@ -11,6 +11,7 @@
   "block.enchantutils.upgrade_bench_warped": "Upgrade Bench (Warped)",
   
   "block.enchantutils.reinforced_anvil": "Reinforced Anvil",
+  "block.enchantutils.mob_killer": "Mob Killer",
   
   "_comment": "Item",
   "item.enchantutils.upgrade_module": "Upgrade Module",
@@ -22,6 +23,8 @@
   "enchantutils.gui.upgradebench": "Upgrade Bench",
   "enchantutils.gui.upgradebench.points": "Points: %s",
   "enchantutils.gui.upgradebench.install": "Install",
+  "enchantutils.gui.mob_killer": "Mob Killer",
+  
   "enchantutils.popup.upgradepoint.unlock": "Upgrade Point Unlocked!",
   
   "_comment": "Tooltips",

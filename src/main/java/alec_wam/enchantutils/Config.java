@@ -17,6 +17,7 @@ public class Config {
         public final ForgeConfigSpec.DoubleValue upgrades_xp_weapon; //500
         public final ForgeConfigSpec.IntValue upgrades_levels_point; //10
         public final ForgeConfigSpec.BooleanValue upgrades_fakeplayer_digging; //true
+        public final ForgeConfigSpec.BooleanValue upgrades_fakeplayer_weapon; //true
         public final ForgeConfigSpec.BooleanValue upgrades_shield_xp_proj; //false
 
         public final ForgeConfigSpec.BooleanValue upgrade_soulbound_consume; //false
@@ -51,6 +52,11 @@ public class Config {
                     .comment("If Fake Players are allowed to gain tool xp")
                     .translation(EnchantmentUtils.resourceDot("config.upgrade.fakeplayer.digging"))
                     .define("diggingFakePlayerAllowed", true);
+            
+            upgrades_fakeplayer_weapon = builder
+                    .comment("If Fake Players are allowed to gain weapon xp")
+                    .translation(EnchantmentUtils.resourceDot("config.upgrade.fakeplayer.weapon"))
+                    .define("weaponFakePlayerAllowed", true);
             
             upgrades_shield_xp_proj = builder
                     .comment("If Sheilds gain tool xp from only projectiles")

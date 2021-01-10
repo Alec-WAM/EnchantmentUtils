@@ -250,7 +250,7 @@ public class UpgradePointManager {
 		setToolXP(stack, 0.0);
 		addToolPoints(stack, 1);
 		
-		player.world.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.UPGRADEPOINT_UNLOCK, player.getSoundCategory(), 0.75F, 1.0F);
+		player.world.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.UPGRADEPOINT_UNLOCK, player.getSoundCategory(), 0.65F, 1.0F);
 		
 		if(player instanceof ServerPlayerEntity){
 			CompoundNBT nbt = new CompoundNBT();

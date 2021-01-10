@@ -99,7 +99,7 @@ public class EnchantmentEditorGui extends BaseContainerGui<EnchantmentEditorCont
 				player.addExperienceLevel(-cost);
 				CompoundNBT nbt = new CompoundNBT();
 				nbt.putInt("Amount", cost);
-				ModNetwork.sendToServer(new PacketEntityMessage(player, PacketEntityMessage.DEFAULT_REMOVE_XP, nbt));
+				ModNetwork.sendToServer(new PacketEntityMessage(player, PacketEntityMessage.DEFAULT_REMOVE_XP_LEVEL, nbt));
 			}
 		    //playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, this.getSoundCategory(), f * 0.75F, 1.0F);
 		    Minecraft.getInstance().world.playSound(editor.getPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.6f, 0.8f, false);

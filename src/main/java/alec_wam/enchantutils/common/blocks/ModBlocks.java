@@ -13,6 +13,8 @@ import alec_wam.enchantutils.common.blocks.anvil.ReinforcedAnvilBlock;
 import alec_wam.enchantutils.common.blocks.editor.EnchantmentEditorBlock;
 import alec_wam.enchantutils.common.blocks.editor.EnchantmentEditorTileEntity;
 import alec_wam.enchantutils.common.blocks.editor.EnchantmentEditorTileEntityRenderer;
+import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerBlock;
+import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerTileEntity;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchBlock;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchTileEntity;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchTileEntityRenderer;
@@ -38,6 +40,9 @@ public class ModBlocks {
 	
 	public static Block REINFORCED_ANVIL;
 	
+	public static Block MOB_KILLER;
+	public static TileEntityType<MobKillerTileEntity> TILE_MOB_KILLER;
+	
 	private static final ImmutableSet<String> WOODS = ImmutableSet.of(
 			"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "crimson", "warped"
 	);
@@ -58,7 +63,11 @@ public class ModBlocks {
 		TILE_UPGRADE_BENCH = registerMultiBlock(UpgradeBenchTileEntity::new, UPGRADE_BENCHES);
 		RegistryHelper.registerTile(TILE_UPGRADE_BENCH, "upgrade_bench");
 		
-		REINFORCED_ANVIL = new ReinforcedAnvilBlock(Block.Properties.create(Material.ANVIL, MaterialColor.OBSIDIAN).hardnessAndResistance(50.0F, 1200.0F).sound(SoundType.ANVIL));		
+		REINFORCED_ANVIL = new ReinforcedAnvilBlock(Block.Properties.create(Material.ANVIL, MaterialColor.OBSIDIAN).hardnessAndResistance(50.0F, 1200.0F).sound(SoundType.ANVIL));	
+		
+		MOB_KILLER = new MobKillerBlock();
+		TILE_MOB_KILLER = TileEntityType.Builder.create(MobKillerTileEntity::new, MOB_KILLER).build(null);
+		RegistryHelper.registerTile(TILE_MOB_KILLER, "mob_killer");
 	}
 
 	public static <T extends TileEntity> TileEntityType<T> registerMultiBlock(Supplier<? extends T> factory, List<Supplier<Block>> list) {

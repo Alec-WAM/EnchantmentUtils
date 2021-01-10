@@ -49,7 +49,8 @@ public class PacketEntityMessage extends AbstractPacket {
 		if(data !=null)buffer.writeCompoundTag(data);
 	}
 	
-	public static final String DEFAULT_REMOVE_XP = "#RemoveXP#";
+	public static final String DEFAULT_ADD_XP = "#AddXP#";
+	public static final String DEFAULT_REMOVE_XP_LEVEL = "#RemoveXP#";
 	
 	@Override
 	public void handleClient(PlayerEntity player, Context ctx) {
@@ -65,7 +66,15 @@ public class PacketEntityMessage extends AbstractPacket {
 	
 	public void handle(Entity entity, Context ctx, boolean client){		
 		if(entity !=null){
-			if(type.equalsIgnoreCase(DEFAULT_REMOVE_XP)){
+			if(type.equalsIgnoreCase(DEFAULT_ADD_XP)){
+				if(entity instanceof PlayerEntity){
+					PlayerEntity player = (PlayerEntity)entity;
+					ctx.enqueueWork(() -> 
+						player.giveExperiencePoints(data.getInt("Amount"))
+					);
+				}
+			}
+			else if(type.equalsIgnoreCase(DEFAULT_REMOVE_XP_LEVEL)){
 				if(entity instanceof PlayerEntity){
 					PlayerEntity player = (PlayerEntity)entity;
 					ctx.enqueueWork(() -> 

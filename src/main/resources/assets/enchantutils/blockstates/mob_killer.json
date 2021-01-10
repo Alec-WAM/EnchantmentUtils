@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "enchantutils:block/mob_killer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "enchantutils:block/mob_killer"
+    },
+    "facing=south": {
+      "model": "enchantutils:block/mob_killer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "enchantutils:block/mob_killer",
+      "y": 270
+    }
+  }
+}

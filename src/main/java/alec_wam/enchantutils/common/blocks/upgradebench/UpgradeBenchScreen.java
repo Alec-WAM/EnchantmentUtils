@@ -383,7 +383,7 @@ public class UpgradeBenchScreen extends BaseContainerGui<UpgradeBenchContainer> 
 												player.addExperienceLevel(-cost);
 												nbt = new CompoundNBT();
 												nbt.putInt("Amount", cost);
-												ModNetwork.sendToServer(new PacketEntityMessage(player, PacketEntityMessage.DEFAULT_REMOVE_XP, nbt));
+												ModNetwork.sendToServer(new PacketEntityMessage(player, PacketEntityMessage.DEFAULT_REMOVE_XP_LEVEL, nbt));
 											}
 											
 											Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));

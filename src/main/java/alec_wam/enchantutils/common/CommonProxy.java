@@ -31,6 +31,7 @@ public class CommonProxy {
 	public void registerListeners(IEventBus bus) {
 		//bus.addListener(this::setup);
 		MinecraftForge.EVENT_BUS.register(new UpgradePointEventHandler());
+		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
 	}
 	
 }

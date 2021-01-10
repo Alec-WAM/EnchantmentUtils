@@ -2,7 +2,6 @@ package alec_wam.enchantutils.common.feature.upgradepoints;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -55,7 +54,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.server.ServerWorld;
@@ -118,9 +116,15 @@ public class UpgradePointEventHandler {
 		
 		if(player.abilities.isCreativeMode)return;
 		
+		if(player instanceof FakePlayer){
+			if(!Config.COMMON.upgrades_fakeplayer_weapon.get()){
+				return;
+			}
+		}
+		
 		ItemStack tool = player.getHeldItemMainhand();
 		
-		if(tool.isEmpty() || !UpgradePointManager.isFeatureEnabled() || !UpgradePointManager.hasUpgrades(tool)){
+		if(tool.isEmpty() || !UpgradePointManager.isFeatureEnabled() || !UpgradePointManager.hasUpgrades(tool) || !ItemUtil.isSword(tool)){
 			return;
 		}		
 		
@@ -131,7 +135,7 @@ public class UpgradePointEventHandler {
 			double damageDealt = target.getHealth() - newHealth;
 			// if we killed it the event for distributing xp was already fired and we just do it manually here
 			if(!target.isAlive()) {
-				UpgradePointManager.earnToolXP(player, tool, Math.round(damageDealt), UpgradePointManager.getMaxXPDig());
+				UpgradePointManager.earnToolXP(player, tool, Math.round(damageDealt), UpgradePointManager.getMaxXPDamage());
 			}
 			else if(target.getCapability(CapabilityEntityDamageXP.CAPABILITY, null).isPresent()) {
 				target.getCapability(CapabilityEntityDamageXP.CAPABILITY, null).ifPresent(cap -> cap.addDamageFromTool((float)damageDealt, tool, player));
@@ -195,6 +199,12 @@ public class UpgradePointEventHandler {
 		PlayerEntity player = (PlayerEntity)event.getEntity();
 		
 		if(player.abilities.isCreativeMode)return;
+		
+		if(player instanceof FakePlayer){
+			if(!Config.COMMON.upgrades_fakeplayer_digging.get()){
+				return;
+			}
+		}
 		
 		ItemStack stack = player.getHeldItemMainhand();
 		if(UpgradePointManager.isFeatureEnabled()){
