@@ -190,7 +190,7 @@ public class ClientProxy extends CommonProxy {
 							Screen.blit(matrixstack, 0, 0, overlayWidth, overlayHeight, 0, 55, 182, 10, 256, 256);
 							
 							double xpValue = UpgradePointManager.getToolXP(hand);
-							double maxXP = ItemUtil.isDiggingTool(hand) ? UpgradePointManager.getMaxXPDig() : UpgradePointManager.getMaxXPDamage();
+							double maxXP = UpgradePointManager.getMaxXP(hand);
 							//int barValue = (int)((overlayWidth - 1) * (xpValue / maxXP));
 							int barValue = Math.max(1, (int)((xpValue / maxXP) * (overlayWidth)));
 							
@@ -318,7 +318,7 @@ public class ClientProxy extends CommonProxy {
 		if(UpgradePointManager.isFeatureEnabled()){
 			if(UpgradePointManager.hasUpgrades(stack)){
 				double xp = UpgradePointManager.getToolXP(stack);
-				double maxXp = ItemUtil.isDiggingTool(stack) ? UpgradePointManager.getMaxXPDig() : UpgradePointManager.getMaxXPDamage();
+				double maxXp = UpgradePointManager.getMaxXP(stack);
 				
 				if(UpgradePointManager.isBasicUpgradeItem(stack)){
 					event.getToolTip().add(new StringTextComponent(TextFormatting.GREEN + LangUtil.localize("tooltip.upgradepoints.basicitem")));

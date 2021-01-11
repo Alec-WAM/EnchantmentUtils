@@ -15,6 +15,9 @@
   
   "_comment": "Item",
   "item.enchantutils.upgrade_module": "Upgrade Module",
+  "item.enchantutils.upgrade_range": "Range Upgrade",
+  "item.enchantutils.upgrade_vacuum": "XP/Item Vacuum Upgrade",
+  "item.enchantutils.upgrade_crit": "Critical Attack Upgrade",
   
   "_comment": "Entity",
   "entity.enchantutils.upgraded_item": "Upgraded Item Entity",

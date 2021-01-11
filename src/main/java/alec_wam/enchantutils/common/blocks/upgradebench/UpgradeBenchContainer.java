@@ -85,14 +85,28 @@ public class UpgradeBenchContainer extends Container
 
             if (index <= 1)
             {
-                if (!this.mergeItemStack(itemstack1, 2, 38, false))
+            	if (!this.mergeItemStack(itemstack1, 29, 38, false))
                 {
-                    return ItemStack.EMPTY;
+	            	if (!this.mergeItemStack(itemstack1, 2, 29, false))
+	                {
+	                    return ItemStack.EMPTY;
+	                }
                 }
             }
             else if (!this.mergeItemStack(itemstack1, 0, 2, false))
             {
-                return ItemStack.EMPTY;
+            	if (index < 29)
+                {
+	            	if (!this.mergeItemStack(itemstack1, 29, 38, false))
+	                {
+	            		return ItemStack.EMPTY;
+	                }
+                } else {
+                	if (!this.mergeItemStack(itemstack1, 2, 29, false))
+	                {
+                		return ItemStack.EMPTY;
+	                }
+                }
             }
 
             if (itemstack1.isEmpty())

@@ -15,6 +15,7 @@ import alec_wam.enchantutils.common.blocks.editor.EnchantmentEditorTileEntity;
 import alec_wam.enchantutils.common.blocks.editor.EnchantmentEditorTileEntityRenderer;
 import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerBlock;
 import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerTileEntity;
+import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerTileEntityRenderer;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchBlock;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchTileEntity;
 import alec_wam.enchantutils.common.blocks.upgradebench.UpgradeBenchTileEntityRenderer;
@@ -79,6 +80,7 @@ public class ModBlocks {
 	public static void clientSetup() {
 		ClientRegistry.bindTileEntityRenderer(TILE_ENCHANTMENT_EDITOR, (d) -> new EnchantmentEditorTileEntityRenderer(d));
 		ClientRegistry.bindTileEntityRenderer(TILE_UPGRADE_BENCH, (d) -> new UpgradeBenchTileEntityRenderer(d));
+		ClientRegistry.bindTileEntityRenderer(TILE_MOB_KILLER, (d) -> new MobKillerTileEntityRenderer(d));
 	}
 
 }

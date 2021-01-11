@@ -45,6 +45,7 @@ public class EnchantmentEditorGui extends BaseContainerGui<EnchantmentEditorCont
 		playerInv = inventory;
 		this.editor = container.editor;
 		this.ySize = 190;
+		this.playerInventoryTitleY = this.ySize - 94;
 	}	
 	
 	@Override

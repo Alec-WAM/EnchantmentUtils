@@ -24,6 +24,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,13 @@ public class UpgradePointManager {
 	
 	public static boolean isFeatureEnabled(){
 		return Config.COMMON.upgrades_enabled.get();
+	}
+	
+	public static double getMaxXP(ItemStack stack){
+		if(ItemUtil.isDiggingTool(stack) && !(stack.getItem() instanceof AxeItem)){
+			return getMaxXPDig();
+		}
+		return getMaxXPDamage();
 	}
 	
 	public static double getMaxXPDig(){

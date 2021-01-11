@@ -33,6 +33,51 @@ public class MobKillerContainer extends Container
         		return 1;
         	}
         });
+        
+        this.addSlot(new Slot(tile, MobKillerTileEntity.SLOT_RANGE, 124, 26) {
+        	@Override
+        	public boolean isItemValid(ItemStack stack)
+	        {
+	            return tile.isItemValidForSlot(MobKillerTileEntity.SLOT_RANGE, stack);
+	        }
+        	
+        	@Override
+        	public void onSlotChanged() {
+        		super.onSlotChanged();
+        		tile.onItemChanged(MobKillerTileEntity.SLOT_RANGE);
+        	}
+        	
+        	@Override
+        	public int getSlotStackLimit() {
+        		return tile.getInventoryStackLimit(MobKillerTileEntity.SLOT_RANGE);
+        	}
+        });
+        
+        this.addSlot(new Slot(tile, MobKillerTileEntity.SLOT_VACUUM, 142, 26) {
+        	@Override
+        	public boolean isItemValid(ItemStack stack)
+	        {
+	            return tile.isItemValidForSlot(MobKillerTileEntity.SLOT_VACUUM, stack);
+	        }
+        	
+        	@Override
+        	public int getSlotStackLimit() {
+        		return 1;
+        	}
+        });
+        
+        this.addSlot(new Slot(tile, MobKillerTileEntity.SLOT_CRIT, 160, 26) {
+        	@Override
+        	public boolean isItemValid(ItemStack stack)
+	        {
+	            return tile.isItemValidForSlot(MobKillerTileEntity.SLOT_CRIT, stack);
+	        }
+        	
+        	@Override
+        	public int getSlotStackLimit() {
+        		return 1;
+        	}
+        });
 
         for (int k = 0; k < 3; ++k)
         {
@@ -75,16 +120,30 @@ public class MobKillerContainer extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index == 0)
+            if (index <= 3)
             {
-                if (!this.mergeItemStack(itemstack1, 1, 37, false))
+            	if (!this.mergeItemStack(itemstack1, 31, 40, false))
                 {
-                    return ItemStack.EMPTY;
+	            	if (!this.mergeItemStack(itemstack1, 4, 31, false))
+	                {
+	                    return ItemStack.EMPTY;
+	                }
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, 1, false))
+            else if (!this.mergeItemStack(itemstack1, 0, 4, false))
             {
-                return ItemStack.EMPTY;
+            	if (index < 31)
+                {
+	            	if (!this.mergeItemStack(itemstack1, 31, 40, false))
+	                {
+	            		return ItemStack.EMPTY;
+	                }
+                } else {
+                	if (!this.mergeItemStack(itemstack1, 4, 31, false))
+	                {
+                		return ItemStack.EMPTY;
+	                }
+                }
             }
 
             if (itemstack1.isEmpty())

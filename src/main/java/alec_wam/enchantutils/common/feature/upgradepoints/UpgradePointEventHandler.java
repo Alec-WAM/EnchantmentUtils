@@ -34,6 +34,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.crafting.FurnaceRecipe;
@@ -135,7 +136,7 @@ public class UpgradePointEventHandler {
 			double damageDealt = target.getHealth() - newHealth;
 			// if we killed it the event for distributing xp was already fired and we just do it manually here
 			if(!target.isAlive()) {
-				UpgradePointManager.earnToolXP(player, tool, Math.round(damageDealt), UpgradePointManager.getMaxXPDamage());
+				UpgradePointManager.earnToolXP(player, tool, Math.round(damageDealt), UpgradePointManager.getMaxXP(tool));
 			}
 			else if(target.getCapability(CapabilityEntityDamageXP.CAPABILITY, null).isPresent()) {
 				target.getCapability(CapabilityEntityDamageXP.CAPABILITY, null).ifPresent(cap -> cap.addDamageFromTool((float)damageDealt, tool, player));
@@ -173,10 +174,14 @@ public class UpgradePointEventHandler {
 						} else {
 							xpEarned = 1.0D;
 						}
-
+						
 						//TODO REMOVE DEBUG
-						if(player.isCrouching())UpgradePointManager.setToolXP(stack, 498);						
-						UpgradePointManager.earnToolXP(player, stack, xpEarned, UpgradePointManager.getMaxXPDig());
+						//if(player.isCrouching())UpgradePointManager.setToolXP(stack, 498);						
+
+						if(stack.getItem() instanceof AxeItem){
+							xpEarned *= Config.COMMON.upgrades_xp_mulit_dig_axe.get();
+						}
+						UpgradePointManager.earnToolXP(player, stack, xpEarned, UpgradePointManager.getMaxXP(stack));
 					}
 				}
 			}
@@ -295,10 +300,13 @@ public class UpgradePointEventHandler {
 	    if(!UpgradePointManager.isFeatureEnabled() || !UpgradePointManager.hasUpgrades(stack)) {
 	      return;
 	    }
-	    	
-	    double multi = event.getSource().isProjectile() ? 2 : 1;
-	    int xpEarned = (int)(Math.max(1, Math.round(event.getAmount())) * multi);
-		UpgradePointManager.earnToolXP(player, stack, xpEarned, UpgradePointManager.getMaxXPDamage());
+	    
+	    double damage = event.getAmount();
+	    if (damage >= 3.0F) {
+		    double multi = event.getSource().isProjectile() ? 2 : 1;
+		    int xpEarned = (int)(Math.max(1, Math.round(damage)) * multi);
+			UpgradePointManager.earnToolXP(player, stack, xpEarned, UpgradePointManager.getMaxXP(stack));
+	    }
 	}
 	
 	private boolean canBlockDamageSource(PlayerEntity player, DamageSource damageSourceIn) {
@@ -341,8 +349,11 @@ public class UpgradePointEventHandler {
 						ItemStack held = player.getHeldItemMainhand();
 						if(UpgradePointManager.isFeatureEnabled()){
 							if(UpgradePointManager.hasUpgrades(held)){
-								int points = delayedPoints.get(player);
-								UpgradePointManager.earnToolXP(player, held, points, UpgradePointManager.getMaxXPDig());
+								double points = delayedPoints.get(player);
+								if(held.getItem() instanceof AxeItem){
+									points *= Config.COMMON.upgrades_xp_mulit_dig_axe.get();
+								}
+								UpgradePointManager.earnToolXP(player, held, points, UpgradePointManager.getMaxXP(held));
 								delayedPoints.remove(player);
 							}
 						}
@@ -415,7 +426,7 @@ public class UpgradePointEventHandler {
 								
 								if(!player.getEntityWorld().isRemote && flyTime % (20 * secondsNeeded) == 0){
 									//TODO Create XP For Basic tools
-									UpgradePointManager.earnToolXP(player, chestStack, 1, UpgradePointManager.getMaxXPDamage());
+									UpgradePointManager.earnToolXP(player, chestStack, 1, UpgradePointManager.getMaxXP(chestStack));
 								}			
 							}				
 						}

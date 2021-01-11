@@ -117,13 +117,4 @@ public class MobKillerFakePlayer extends FakePlayerBase {
 		rotationYaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F);
 	}
 
-	//TODO don't let Creepers blow us up
-
-	/*@Override
-	public boolean isCreeperTarget(@Nonnull EntityCreeper swellingCreeper) {
-		return KillerJoeConfig.killerProvokesCreeperExplosions.get();
-	}*/
-
-	// don't let Zombies summon aid
-
 }

@@ -1,14 +1,18 @@
 package alec_wam.enchantutils.common.blocks.mobkiller;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import alec_wam.enchantutils.EnchantmentUtils;
 import alec_wam.enchantutils.client.gui.BaseContainerGui;
 import alec_wam.enchantutils.common.network.ModNetwork;
 import alec_wam.enchantutils.common.network.PacketTileMessage;
+import alec_wam.enchantutils.common.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.widget.button.CheckboxButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -90,6 +94,36 @@ public class MobKillerScreen extends BaseContainerGui<MobKillerContainer> {
   		}
       	  
       }));
+      
+      this.addButton(new CheckboxButton(guiLeft + 173, guiTop + 8, 10, 10, new StringTextComponent("Show Killbox"), tile.isKillBoxVisible){
+
+    		@Override
+    		public void onPress() {
+    			super.onPress();
+    			tile.isKillBoxVisible = isChecked();
+    			CompoundNBT nbt = new CompoundNBT();
+    			nbt.putBoolean("Show", isChecked());
+    			ModNetwork.sendToServer(new PacketTileMessage(tile.getPos(), "ShowKillbox", nbt));
+    		}
+    		
+    		@SuppressWarnings("deprecation")
+			@Override
+    		public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    			Minecraft minecraft = Minecraft.getInstance();
+    			minecraft.getTextureManager().bindTexture(new ResourceLocation("textures/gui/checkbox.png"));
+    			RenderSystem.enableDepthTest();
+    			RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
+    			RenderSystem.enableBlend();
+    			RenderSystem.defaultBlendFunc();
+    			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+    			RenderUtil.innerBlit(matrixStack, this.x, this.x + this.width, this.y, this.y + this.height, 0, 20, 20, this.isFocused() ? 20.0F : 0.0F, isChecked() ? 20.0F : 0.0F, 64, 64);
+    			this.renderBg(matrixStack, minecraft, mouseX, mouseY);
+    			if (this.isHovered()) {
+    				MobKillerScreen.this.renderTooltip(matrixStack, getMessage(), mouseX, mouseY);
+    			}
+    		}
+        	  
+        });
    }
 
    @Override

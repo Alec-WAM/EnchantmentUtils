@@ -88,14 +88,28 @@ public class EnchantmentEditorContainer extends Container
 
             if (index <= 2)
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, false))
+            	if (!this.mergeItemStack(itemstack1, 30, 39, false))
                 {
-                    return ItemStack.EMPTY;
+	            	if (!this.mergeItemStack(itemstack1, 3, 30, false))
+	                {
+	                    return ItemStack.EMPTY;
+	                }
                 }
             }
             else if (!this.mergeItemStack(itemstack1, 0, 3, false))
             {
-                return ItemStack.EMPTY;
+            	if (index < 30)
+                {
+	            	if (!this.mergeItemStack(itemstack1, 30, 39, false))
+	                {
+	            		return ItemStack.EMPTY;
+	                }
+                } else {
+                	if (!this.mergeItemStack(itemstack1, 3, 30, false))
+	                {
+                		return ItemStack.EMPTY;
+	                }
+                }
             }
 
             if (itemstack1.isEmpty())

@@ -14,7 +14,8 @@ public class Config {
     {
         public final ForgeConfigSpec.BooleanValue upgrades_enabled;
         public final ForgeConfigSpec.DoubleValue upgrades_xp_dig; //500
-        public final ForgeConfigSpec.DoubleValue upgrades_xp_weapon; //500
+        public final ForgeConfigSpec.DoubleValue upgrades_xp_weapon; //1000
+        public final ForgeConfigSpec.DoubleValue upgrades_xp_mulit_dig_axe; //2
         public final ForgeConfigSpec.IntValue upgrades_levels_point; //10
         public final ForgeConfigSpec.BooleanValue upgrades_fakeplayer_digging; //true
         public final ForgeConfigSpec.BooleanValue upgrades_fakeplayer_weapon; //true
@@ -38,10 +39,15 @@ public class Config {
                     .translation(EnchantmentUtils.resourceDot("config.upgrade.xpdig"))
                     .defineInRange("xpNeededDigTool", 500.0D, 0.0D, Double.MAX_VALUE);
 
+            upgrades_xp_mulit_dig_axe = builder
+                    .comment("Digging Bonus for Axe since it is a weapon as well")
+                    .translation(EnchantmentUtils.resourceDot("config.upgrade.axe.multi"))
+                    .defineInRange("xpAxeDigMulti", 2.0D, 0.0D, Double.MAX_VALUE);
+            
             upgrades_xp_weapon = builder
                     .comment("Weapon XP needed to unlock an Upgrade Point")
                     .translation(EnchantmentUtils.resourceDot("config.upgrade.xpweapon"))
-                    .defineInRange("xpNeededWeapon", 500.0D, 0.0D, Double.MAX_VALUE);
+                    .defineInRange("xpNeededWeapon", 1000.0D, 0.0D, Double.MAX_VALUE);
             
             upgrades_levels_point = builder
                     .comment("Experience Levels per Upgrade Point")

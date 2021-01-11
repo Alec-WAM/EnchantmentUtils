@@ -18,7 +18,6 @@ import alec_wam.enchantutils.common.feature.upgradepoints.upgrade.IBaseUpgrade;
 import alec_wam.enchantutils.common.network.ModNetwork;
 import alec_wam.enchantutils.common.network.PacketEntityMessage;
 import alec_wam.enchantutils.common.network.PacketTileMessage;
-import alec_wam.enchantutils.common.util.ItemUtil;
 import alec_wam.enchantutils.common.util.LangUtil;
 import alec_wam.enchantutils.common.util.RenderUtil;
 import net.minecraft.client.Minecraft;
@@ -543,7 +542,7 @@ public class UpgradeBenchScreen extends BaseContainerGui<UpgradeBenchContainer> 
 				
 				if(!UpgradePointManager.isBasicUpgradeItem(tool)){
 					double xp = UpgradePointManager.getToolXP(tool);
-					double max = ItemUtil.isWeapon(tool) ? UpgradePointManager.getMaxXPDamage() : UpgradePointManager.getMaxXPDig();
+					double max = UpgradePointManager.getMaxXP(tool);
 					int barX = 7;
 					int barWidth = 60;
 					int barY = 80;
@@ -592,7 +591,7 @@ public class UpgradeBenchScreen extends BaseContainerGui<UpgradeBenchContainer> 
 		if(!elytraTrailSettings){
 			if(showXPTooltip){
 				double xp = UpgradePointManager.getToolXP(tool);
-				double max = ItemUtil.isWeapon(tool) ? UpgradePointManager.getMaxXPDamage() : UpgradePointManager.getMaxXPDig();
+				double max = UpgradePointManager.getMaxXP(tool);
 				String xpStr = xp + " / " + max;
 				matrixstack.push();
 				matrixstack.translate((float)-guiLeft, (float)-guiTop, 0.0F);

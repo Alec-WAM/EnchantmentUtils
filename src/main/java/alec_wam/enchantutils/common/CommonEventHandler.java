@@ -3,16 +3,17 @@ package alec_wam.enchantutils.common;
 import java.util.Collection;
 import java.util.Iterator;
 
-import alec_wam.enchantutils.EnchantmentUtils;
 import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerFakePlayer;
+import alec_wam.enchantutils.common.blocks.mobkiller.MobKillerTileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.ZombieEvent.SummonAidEvent;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.eventbus.api.Event.Result;
 
 public class CommonEventHandler {
 
@@ -44,6 +45,20 @@ public class CommonEventHandler {
 							dropItem.setItem(insertStack);
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onCrit(CriticalHitEvent event){
+		if(event.getPlayer() instanceof MobKillerFakePlayer){
+			MobKillerFakePlayer player = (MobKillerFakePlayer)event.getPlayer();
+			if(player.mobKillerTile !=null){
+				ItemStack upgrade = player.mobKillerTile.getStackInSlot(MobKillerTileEntity.SLOT_CRIT);
+				if(!upgrade.isEmpty()){
+					event.setDamageModifier(1.5F);
+					event.setResult(Result.ALLOW);
 				}
 			}
 		}

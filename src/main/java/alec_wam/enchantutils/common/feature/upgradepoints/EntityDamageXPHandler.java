@@ -98,15 +98,16 @@ public class EntityDamageXPHandler implements IDamageEntityXP, ICapabilitySerial
 				// check for identity. should work in most cases because the entity was killed without loading/unloading
 				for(int i = 0; i < itemHandler.getSlots(); i++) {
 					if(itemHandler.getStackInSlot(i) == tool) {
-						UpgradePointManager.earnToolXP(player, tool, Math.round(damage), UpgradePointManager.getMaxXPDamage());
+						UpgradePointManager.earnToolXP(player, tool, Math.round(damage), UpgradePointManager.getMaxXP(tool));
 						return;
 					}
 				}
 	
 				// check for equal stack in case instance equality didn't find it
 				for(int i = 0; i < itemHandler.getSlots(); i++) {
-					if(UpgradePointManager.areUpgradeItemsEqual(itemHandler.getStackInSlot(i), tool)) {
-						UpgradePointManager.earnToolXP(player, itemHandler.getStackInSlot(i), Math.round(damage), UpgradePointManager.getMaxXPDamage());
+					ItemStack stack = itemHandler.getStackInSlot(i);
+					if(UpgradePointManager.areUpgradeItemsEqual(stack, tool)) {
+						UpgradePointManager.earnToolXP(player, stack, Math.round(damage), UpgradePointManager.getMaxXP(stack));
 						return;
 					}
 				}
